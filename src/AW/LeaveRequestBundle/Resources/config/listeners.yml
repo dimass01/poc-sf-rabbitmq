@@ -1,0 +1,7 @@
+services:
+    aw_leave_request.event_listener.leaveRequest:
+        class: AW\LeaveRequestBundle\EventListener\LeaveRequestListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'aw_leave_request.event.leaveRequest_create', method: 'onLeaveRequestCreate' }
+        arguments:
+            - '@aw_leave_request.producer.leaveRequest_create'

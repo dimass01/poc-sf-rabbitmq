@@ -1,0 +1,5 @@
+services:
+    aw_leave_request.controller.leaveRequest:
+        class: AW\LeaveRequestBundle\Controller\LeaveRequestController
+        arguments:
+            - '@aw_leave_request.service.leaveRequest'

@@ -1,0 +1,4 @@
+aw_leave_request:
+    resource: "@AWLeaveRequestBundle/Controller/"
+    type:     annotation
+    prefix:   /

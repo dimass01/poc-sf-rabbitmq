@@ -1,0 +1,6 @@
+services:
+    aw_leave_request.consumer.leaveRequest_create:
+        class: AW\LeaveRequestBundle\Consumer\LeaveRequestCreateConsumer
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@logger'

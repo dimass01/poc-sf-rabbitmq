@@ -1,0 +1,6 @@
+services:
+    aw_leave_request.service.leaveRequest:
+        class: AW\LeaveRequestBundle\Service\LeaveRequestService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'

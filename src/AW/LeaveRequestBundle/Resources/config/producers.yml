@@ -1,0 +1,5 @@
+services:
+    aw_leave_request.producer.leaveRequest_create:
+        class: AW\LeaveRequestBundle\Producer\LeaveRequestCreateProducer
+        arguments:
+            - '@old_sound_rabbit_mq.leave_request_create_producer'
