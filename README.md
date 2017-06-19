@@ -18,7 +18,7 @@ Leave request **json body** :
 
 {
 	
-	"civility": "Mme.",
+	"civility": "M.",
 	"firstName": "Tintin",
 	"lastName": "DUPONT",
 	"createdAt": "2011-06-05 00:00:00",
@@ -40,7 +40,7 @@ Scenario
 Later when you want to consume 10 messages out of the `leave_request_qu` queue, you just run on the CLI:
 
 ```php
-$ php bin/console rabbitmq:consumer -m 10 upload_picture
+$ php bin/console rabbitmq:consumer -m 10 leave_request_create
 ```
 
 All the examples expect a running RabbitMQ server.
