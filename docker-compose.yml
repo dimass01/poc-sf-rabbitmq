@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+    db:
+        image: mysql:latest
+        volumes:
+          - /var/lib/mysql
+        ports:
+          - "3306:3306"
+        links:
+            - php
+            - rmq
+        environment:
+            MYSQL_ROOT_PASSWORD: pocsfrabbitmq
+            MYSQL_DATABASE: pocsfrabbitmq
+            MYSQL_USER: pocsfrabbitmq
+            MYSQL_PASSWORD: pocsfrabbitmq
+
+    php:
+        build: docker/php7.0-fpm # Get our Dockerfile configuration
+        ports:
+            - 9010:9000
+        links:
+            - rmq
+        volumes:
+            - .:/var/www/poc-sf-rabbitmq
+        working_dir: /var/www/poc-sf-rabbitmq
+
+    nginx:
+        build: docker/nginx
+        ports:
+            - 8084:80
+        links:
+            - php
+            - rmq
+        volumes_from:
+            - php
+        volumes:
+            - ./docker/logs/nginx/:/var/log/nginx
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+          SERVICE_80_NAME: 'phpmyadmin'
+          SERVICE_80_TAGS: 'http'
+          MYSQL_HOST: 'root'
+          MYSQL_PORT: '3308|3306'
+        links:
+            - php
+            - rmq
+        ports:
+            - 8181:80
+
+    rmq:
+        image: "rabbitmq:3.5.3-management"
+        hostname: "rmq"
+        environment:
+          RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+          RABBITMQ_DEFAULT_USER: "rabbitmq"
+          RABBITMQ_DEFAULT_PASS: "rabbitmq"
+          RABBITMQ_DEFAULT_VHOST: "/"
+        ports:
+          - "15672:15672"
+          - "5672:5672"

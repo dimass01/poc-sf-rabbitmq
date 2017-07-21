@@ -3,10 +3,7 @@ Poc Symfony 3 Rabbitmq
 
 A Symfony project created on May 30, 2017, 10:38 am.
 
-Create a leave request
-----------------------
-
-**Example** : 
+**Example 1 (Topic)** : 
 - **topic** exchange 
 - 1 Producer,1 Exchange, 1 Queue, N Worker, 1 Consumer
 
